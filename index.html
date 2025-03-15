@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Expense Tracker</h1>
+
+        <!-- Savings Section -->
+        <div class="savings-section">
+            <h3>Set Savings Target</h3>
+            <input type="number" id="savings-target" placeholder="Enter Target">
+            <button onclick="setSavingsTarget()">Set Target</button>
+            <button onclick="setNewTarget()">Set New Target</button>
+            <h3>Remaining to Use: ₹<span id="remaining-savings">0</span></h3>
+            <h3>Current Target: ₹<span id="current-target">0</span></h3>
+        </div>
+
+        <!-- Expense Entry Section -->
+        <div class="input-section">
+            <h3>Add Expense</h3>
+            <input type="text" id="expense-desc" placeholder="Expense Description">
+            <input type="number" id="expense-amount" placeholder="Amount">
+            <select id="expense-category">
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Bills">Bills</option>
+                <option value="Other">Other</option>
+            </select>
+            <button onclick="addExpense()">Add Expense</button>
+        </div>
+
+        <!-- Expense List Section -->
+        <h3>Expenses for <span id="current-date"></span></h3>
+        <ul id="expense-list"></ul>
+
+        <!-- Download Button -->
+        <button onclick="downloadReceipt()">Download Receipt</button>
+    </div>
+</body>
+</html>
