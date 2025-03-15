@@ -1,10 +1,11 @@
 // script.js
 
 document.addEventListener("DOMContentLoaded", function() {
-    loadSavingsTarget();
-    loadExpenses();
-    document.getElementById("current-date").textContent = new Date().toLocaleDateString();
+    let savedTarget = localStorage.getItem("savingsTarget") || 0;
+    document.getElementById("current-target").textContent = savedTarget;
+    document.getElementById("remaining-savings").textContent = savedTarget;
 });
+
 
 function setSavingsTarget() {
     let target = document.getElementById("savings-target").value;
@@ -12,9 +13,12 @@ function setSavingsTarget() {
         alert("Enter a valid savings target!");
         return;
     }
+    
     localStorage.setItem("savingsTarget", target);
     document.getElementById("current-target").textContent = target;
-    document.getElementById("remaining-savings").textContent = target;
+    document.getElementById("remaining-savings").textContent = target;  
+
+    console.log("Saved Target:", localStorage.getItem("savingsTarget"));
 }
 
 
