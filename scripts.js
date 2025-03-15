@@ -7,15 +7,16 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function setSavingsTarget() {
-    let target = parseFloat(document.getElementById("savings-target").value);
-    if (isNaN(target) || target <= 0) {
-        alert("Please enter a valid savings target.");
+    let target = document.getElementById("savings-target").value;
+    if (!target || target <= 0) {
+        alert("Enter a valid savings target!");
         return;
     }
     localStorage.setItem("savingsTarget", target);
-    localStorage.setItem("remainingSavings", target);
-    updateSavingsUI();
+    document.getElementById("current-target").textContent = target;
+    document.getElementById("remaining-savings").textContent = target;
 }
+
 
 function setNewTarget() {
     localStorage.removeItem("savingsTarget");
@@ -33,15 +34,15 @@ function updateSavingsUI() {
 }
 
 function addExpense() {
-    let desc = document.getElementById("expense-desc").value.trim();
     let amount = parseFloat(document.getElementById("expense-amount").value);
-    let category = document.getElementById("expense-category").value;
-    let date = new Date().toLocaleDateString();
-
-    if (desc === "" || isNaN(amount) || amount <= 0) {
-        alert("Please enter valid expense details.");
+    if (!amount || amount <= 0) {
+        alert("Enter a valid expense amount!");
         return;
     }
+    let remaining = localStorage.getItem("savingsTarget") - amount;
+    localStorage.setItem("savingsTarget", remaining);
+    document.getElementById("remaining-savings").textContent = remaining;
+}
 
     let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
     expenses.push({ desc, amount, category, date });
